@@ -1,0 +1,75 @@
+---
+layout: default
+title: Macro-Sea
+path: home
+---
+
+<div
+    class="container mx-auto md:flex flex-row flex-wrap justify-between items-center content-start snap snap-x snap-mandatory">
+    {% for bgblend in ["unset", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn",
+    "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"] %}
+    {% for fgblend in ["unset", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn",
+    "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"] %}
+    <figure class="text-center mt-3 mr-3 snap-start object-fill" style="--bg-blend:{{bgblend}};--fg-blend:{{fgblend}}">
+        <a href="#bg={{bgblend}},fg={{fgblend}}">
+            <div class="x img-wrapper md:max-h-40 w-auto">
+                <img src="https://picsum.photos/200/300.jpg">
+            </div>
+        </a>
+        <figcaption class="bg-ms-yellow" style="--hey: ms-yellow" >{{bgblend}},{{fgblend}}</figcaption>
+    </figure>
+    {% endfor %}
+    {% endfor %}
+</div>
+<style>
+    :root {
+
+        --yellow: rgb(249, 212, 77);
+        --gray: rgb(243, 244, 246);
+
+        --base: var(--yellow);
+        --bg-blend: screen;
+        --blur: 0px;
+        --fg-blend: multiply;
+        --foreground: var(--gray);
+        --opacity: 1;
+        --spacing: 1em;
+        --contrast: 3;
+    }
+
+    .img-wrapper {
+        background-color: var(--base);
+        display: flex;
+        flex: 1 1 100%;
+        height: 100%;
+        overflow: hidden;
+        padding: var(--spacing);
+        position: relative;
+    }
+
+    .img-wrapper img {
+        filter: grayscale(100%) contrast(var(--contrast)) blur(var(--blur));
+        flex: 1 0 100%;
+        height: 100%;
+        max-width: 100%;
+        mix-blend-mode: var(--bg-blend);
+        object-fit: cover;
+        opacity: var(--opacity);
+        position: relative;
+        width: 100%;
+    }
+
+    .img-wrapper::before {
+        background-color: var(--foreground);
+        bottom: 0;
+        content: '';
+        height: 100%;
+        left: 0;
+        mix-blend-mode: var(--fg-blend);
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+    }
+</style>

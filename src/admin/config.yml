@@ -1,0 +1,123 @@
+backend:
+  # Use netlify identity as backend
+  name: git-gateway
+  branch: master
+  ### enable below lines for github integration ###
+  # name: github
+  # repo: mimecine/neat-macro-sea
+media_folder: "src/static/img"
+public_folder: "/static/img"
+
+# Please run "npx netlify-cms-proxy-server" for local backend
+local_backend: true
+# publish_mode: editorial_workflow
+collections:      
+  - label: "Projects"
+    label_singular: "Project"
+    name: "projects"
+    folder: "src/projects"
+    create: true
+    delete: true
+    editor:
+      preview: false
+    summary: "{{title}} - Tagged: {{tags}} "
+
+    fields:
+      - {label: "Title", name: "title", widget: "string" }
+      - {label: "Description", name: "body", widget: "markdown" }
+      - {label: "Credits", name: "credits", widget: "markdown", required: false }
+      - label: "Images"
+        name: "images"
+        widget: "list"
+        summary: '{{fields.image}}'
+        fields:
+          - {label: "Image", name: "image", widget: "image" }
+      - widget: list
+        label: "Things that... (comma-separated)"
+        name: tags
+        required: false
+
+      
+
+  - label: "Products"
+    label_singular: "Product"
+    name: "products"
+    folder: "src/products"
+    create: true
+    delete: true
+    editor:
+      preview: true
+    summary: "{{title}} - {{price}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string" }
+      - {label: "Description", name: "body", widget: "markdown" }
+      - {label: "Price", name: "price", widget: "number" }
+      - label: "Images"
+        name: "images"
+        widget: "list"
+        fields:
+          - {label: "Image", name: "image", widget: "image" }
+          - {label: "Caption/Alt", name: "caption", widget: "string" }
+      - widget: list
+        label: tags
+        name: tags
+  
+  - label: "Things" 
+    label_singular: Thing
+    name: thing
+    folder: src/thing
+    create: true
+    delete: true
+    editor:
+      preview: false
+    summary: "{{title}}"
+    fields:
+      - {label: Title, name: title, widget: string }
+      - {label: "Images", name: images, widget: image}
+      - {label: Projects, name: projects, widget: relation, multiple: true, collection: projects, value_field: title, search_fields: ['title'] }
+
+  - label: "Settings"
+    name: "settings"
+    editor:
+      preview: false
+    files:
+      - label: "Categories"
+        name: "categories"
+        file: "src/_data/categories.yaml"
+        fields:
+          - label: "Category"
+            name: "category"
+            widget: string
+            allow_add: true
+      - label: "Navigation"
+        name: "items"
+        file: "src/_data/navigation.yaml"
+        fields:
+          - label: Nav Items
+            name: items
+            widget: list
+            allow_add: true
+            collapsed: false
+            fields:
+              - { label: Title, name: text, widget: string }
+              - { label: URL, name: url, widget: string }
+      - label: "Quick Links"
+        name: "links"
+        file: "src/_data/quicklinks.yaml"
+        fields:
+          - label: Nav Items
+            name: links
+            widget: list
+            collapsed: false
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: URL, name: url, widget: string }
+              - { label: Description, name: desc, widget: string }
+      - label: "Meta Settings"
+        name: "settings"
+        file: "src/_data/settings.yaml"
+        fields:
+          - { label: Name, name: name, widget: string }
+          - { label: Author, name: author, widget: string }
+          - { label: URL, name: url, widget: string }
+

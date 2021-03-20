@@ -1,0 +1,28 @@
+---
+layout: default
+nomenu: true
+---
+<div class="xcontainer xmax-w-4xl xmt-6  xpx-6 snap-y snap-mandatory snap">
+    <div class="pb-5 mb-5 border-b border-gray-100">
+        <!-- <h1 class="xfont-thin text-5xl uppercase tracking-widest">{{title}}</h1> -->
+    </div>
+    {%for image in images%}
+    <div class="h-screen border-2 block snap-start">
+    <figure>
+        {% image image.image, image.caption, "object-cover xw-auto xh-screen", "100vw" %}</a>  
+    </figure>
+    </div>
+    {%endfor%}
+    </div>
+
+    <article class="prose lg:prose-xl my-4 mx-auto">
+
+          <div>{{ content | safe }}</div>
+
+          <div class="font-thin text-xs border-t italic">
+            {{ credits| md | safe }}
+          </div>
+
+    </article>
+
+</div>

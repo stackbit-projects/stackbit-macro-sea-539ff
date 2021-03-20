@@ -1,0 +1,35 @@
+---
+layout: default
+---
+{%block head%}
+{%endblock%}
+
+<div class="container max-w-4xl mt-6  px-6">
+    <div class="pb-5 mb-5 border-b border-gray-100">
+      <h1 class="font-thin text-5xl uppercase tracking-wider">{{title}}</h1>
+    </div>
+    <article class="prose lg:prose-xl my-4 mx-auto flo">
+        {% image images[0].image, images[0].caption, "border w-full", "(min-width: 30em) 50vw, 100vw" %}
+
+        {{ content | safe }}
+
+
+        <span class="text-2xl text-red-600">Only ${{price}}.00! <sup class="text-sm"><a href="#footnote1" class="no-underline text-gray-500">*1)</a></sup> 
+        <br>
+        <button class="snipcart-add-item px-4 py-1 bg-ms-green text-gray-100 hover:shadow-lg"
+        data-item-id="{{title|slug}}"
+        data-item-price="{{price}}.00"
+        data-item-url="https://neat-macro-sea.netlify.app/products/{{title|slug}}/"
+        data-item-image="{{images[0].image}}"
+        data-item-name="{{title}}">
+        PAY US AND YOU'LL GET IT. GET IT? SO GET IT NOW!
+        </button>
+        <br>
+        You deserve this thing. We deserve your money.
+        </span>
+        <br>
+        <p id="footnote1" class="text-xs pt-40 italics text-gray-500">1. - Before shipping, taxes, fees, their cut, and our cut!</p>
+    </article>
+
+</div>
+

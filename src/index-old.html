@@ -1,0 +1,17 @@
+---
+layout: default-x
+title: Macro-Sea
+path: home
+---
+
+<div class="container grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+  {% for project in collections.projects %}
+    {%set index = loop.index %}
+    {%for image in project.data.images %}
+    <figure class="text-center mt-3" data-tags="{{project.data.tags}}">
+          <a href="{{project.url}}">{% image image.image, image.caption, "xborder object-fill xmd:max-h-40 w-auto", "(min-width: 600px) 600px, 14em" %}</a>  
+          <figcaption class="">{{index}}.{{loop.index}}</figcaption>  
+    </figure>
+    {%endfor%}
+  {% endfor %}
+</div>

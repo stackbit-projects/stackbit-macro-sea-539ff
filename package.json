@@ -1,0 +1,36 @@
+{
+  "scripts": {
+    "start": "npm-run-all --parallel netlify css eleventy",
+    "netlify": "npx netlify-cms-proxy-server",
+    "eleventy": "eleventy --serve",
+    "debug": "set DEBUG=* & eleventy",
+    "css": "postcss src/static/css/tailwind.css --o _tmp/static/css/style.css --watch",
+    "build": "cross-env NODE_ENV=production eleventy && cross-env NODE_ENV=production postcss src/static/css/tailwind.css --o _site/static/css/style.css"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^0.11.1",
+    "@11ty/eleventy-img": "^0.8.2",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
+    "@tailwindcss/jit": "^0.1.1",
+    "@tailwindcss/typography": "^0.4.0",
+    "alpine-turbo-drive-adapter": "^1.0.2",
+    "alpinejs": "^2.8.1",
+    "autoprefixer": "^10.2.5",
+    "cross-env": "^7.0.2",
+    "cssnano": "^4.1.10",
+    "html-minifier": "^4.0.0",
+    "js-yaml": "^4.0.0",
+    "jshint": "^2.12.0",
+    "luxon": "^1.25.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.2.7",
+    "postcss-cli": "^8.3.1",
+    "postcss-preset-env": "^6.7.0",
+    "prismjs": "^1.21.0",
+    "sharp-cli": "^1.15.0",
+    "tailwindcss": "^2.0.2",
+    "tailwindcss-scroll-snap": "^1.1.0",
+    "tocca": "^2.0.9",
+    "turbolinks": "^5.2.0"
+  }
+}

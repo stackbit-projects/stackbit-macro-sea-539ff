@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Content Manager</title>
+</head>
+
+<body>
+    <!-- Include the script that builds the page and powers Netlify CMS -->
+    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+
+    <script>
+
+
+        var CaptionedMediaControl = createClass({
+            handleChange: function (e) {
+                const separator = this.props.field.get('separator', ', ')
+                this.props.onChange(e.target.value.split(separator).map((e) => e.trim()));
+            },
+
+            render: function () {
+                const separator = this.props.field.get('separator', ', ');
+                var value = this.props.value;
+                return h('input', {
+                    id: this.props.forID,
+                    className: this.props.classNameWrapper,
+                    type: 'text',
+                    value: value ? value.join(separator) : '',
+                    onChange: this.handleChange,
+                });
+            },
+        });
+
+        var CaptionedMediaPreview = createClass({
+            render: function () {
+                return h('ul', {},
+                    this.props.value.map(function (val, index) {
+                        return h('li', { key: index }, val);
+                    })
+                );
+            }
+        });
+
+        var schema = {
+            properties: {
+                separator: { type: 'string' },
+            },
+        }
+
+        CMS.registerWidget('captionedmedia', CaptionedMediaControl, CaptionedMediaPreview, schema);
+    </script>
+
+
+
+    <!-- Netlify Identity Widget -->
+    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</body>
+
+</html>

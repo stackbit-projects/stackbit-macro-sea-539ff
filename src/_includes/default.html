@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    {{title}}
+  </title>
+  {% if description %}
+  <meta name="description" content="{{description}}" />
+  {% endif %}
+  <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+  {# <!-- <script src="/static/js/alpine-turbo-adapter.js"></script> --> #}
+  <script src="/static/js/alpine.js"></script>
+  {# <!-- <script src="/static/js/turbolinks.js"></script> --> #}
+  {# <script src="/static/js/Tocca.min.js"></script> #}
+  <script src="/static/js/index.js"></script>
+
+  <link rel="preconnect" href="https://app.snipcart.com">
+  <link rel="preconnect" href="https://cdn.snipcart.com">
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" />
+  <script async defer src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
+
+  {% block head %}{% endblock %}
+</head>
+
+<body class="bg-ms-bg min-h-screen xpx-2 grid grid-flow-row grid-pancake-stack">
+  {% include "./partials/navbar.html" %}
+
+  <main>
+    {{ content | safe }}
+  </main>
+
+  {% include "./partials/footer.html" %}
+
+  <div hidden id="snipcart" data-api-key="YzQwZjRjOGItODdjNi00NzczLThmNWYtYjM0NWY4MDQ3MTI5NjM3MDMzNjMyMzExNjk2NzM2"
+    data-config-modal-style="side" data-config-add-product-behavior="xnone" class="z-40"></div>
+
+    {% if path == "home" %}
+    {# <!-- Netlify Identity Widget -->
+    <!-- Needed only if you are using Netlify Identity feature --> #}
+    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    {% endif %}
+
+    {% include "./partials/svg-defs.html"%}
+</body>
+
+</html>

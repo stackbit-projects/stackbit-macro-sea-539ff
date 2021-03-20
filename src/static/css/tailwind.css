@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*Your Custom CSS Goes here*/
+@layer base {
+  /* @font-face {
+    font-family: Proxima Nova;
+    font-weight: 400;
+    src: url(/fonts/proxima-nova/400-regular.woff) format("woff");
+  } */ 
+
+
+  @font-face {
+    font-family: 'ABC Marfa';
+    src: url('ABCMarfa-LightItalic.woff2') format('woff2'), url('ABCMarfa-LightItalic.woff') format('woff');
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'ABC Marfa';
+    src: url('ABCMarfa-Light.woff2') format('woff2'), url('ABCMarfa-Light.woff') format('woff');
+  }
+
+  :root {
+    --ms-bg: #f3f4f6;
+    --ms-yellow: #F9D44D;
+    --ms-blue: #ABFFF5;
+    --ms-green: #395937;
+    --ms-brown: #A57A00;
+    --ms-orange: orange;
+    --ms-primary: var(--ms-orange);
+    --filter-x-contrast: 4;
+    --filter-x-invert: 0;
+    --filter-x-bg: var(--ms-bg);
+    --filter-x-color: var(--ms-primary);
+  }
+
+  h1 {
+    @apply text-4xl font-thin tracking-wider mb-3 text-center lg:text-7xl;
+  }
+
+  h3 {
+    @apply text-2xl font-bold mb-3;
+  }
+
+  [x-cloak] {
+    display: none !important;
+  }
+  [id] {
+    scroll-margin-top: 2ex;
+  }
+  :target {
+    /* text-decoration: underline;
+    text-decoration-thickness: 2ex;
+    text-decoration-color: #c4e4fb;
+    text-decoration-skip-ink: none;
+    text-underline-offset: -2.8ex; */
+
+    text-shadow: red 0 0 2rem;
+    color: white !important;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+}
+
+@layer components {
+  .btn-blue {
+    /* @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75; */
+  }
+}
+@layer utilities {
+
+
+
+
+  @variants responsive {
+    .grid-pancake-stack {
+      grid-template-rows: auto 1fr auto;
+    }
+  }
+  @variants dark, focus, hover {
+
+    .filter-y {
+      @apply flex flex-auto h-full overflow-hidden relative;
+      background-color: var(--filter-x-color);
+      background-image: none !important;
+    }
+    .filter-y img {
+        filter: grayscale(100%) contrast(var(--filter-x-contrast,1)) invert(var(--filter-x-invert,0));
+        mix-blend-mode: screen;
+      }
+    .filter-y::before {
+        @apply h-full w-full z-10 top-0 left-0 bottom-0 right-0 absolute;
+        background-color: var(--filter-x-bg);
+        mix-blend-mode: darken;
+        content: '';  
+      }
+  }
+}
+
+  /*****   SNIPCART CUSTOMIZATION *****/
+  #snipcart.snipcart * {
+    @apply font-sans font-light tracking-wider;
+  }
+  #snipcart.snipcart .snipcart-cart-button--highlight, #snipcart.snipcart .snipcart__box--badge-highlight {
+    background-image: none;
+    @apply bg-ms-green;
+  }
+
+  #snipcart.snipcart .snipcart__font--black {
+    @apply font-light tracking-wider;
+  }
+
+  #snipcart.snipcart .snipcart-cart__secondary-header {
+    @apply bg-ms-green;
+  }
+

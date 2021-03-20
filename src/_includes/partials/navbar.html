@@ -1,0 +1,61 @@
+<div class="{{ 'lg:sticky lg:top-0' if path == 'home' }} sticky top-0 w-full bg-ms-bg text-sm md:text-lg lg:text-3xl z-10">
+    <nav class="xcontainer flex items-center justify-center lg:justify-between flex-wrap py-1 lg:py-3 lg:px-0 mx-auto" x-data="{ isOpen: false, menuIsOpen: false }" @keydown.escape="isOpen = false; menuIsOpen = false" x-bind:class="{ 'bg-ms-green text-ms-blue': isOpen }">
+        <!--Logo etc-->
+        <div class="flex items-center xw-1/3 text-right pl-3">
+            <a href="/" class="xtext-gray-500">
+                <svg viewBox="0 0 76 35"  class="fill-current" style="width:2em; height:1em;"><use xlink:href="#logo" x="0" y="0" /></svg>
+            </a>
+        </div>
+
+        <!--Toggle button (hidden on large screens)-->
+        <button @click="isOpen = !isOpen" type="button" class="{{ 'invisible' if nomenu == true }} m-auto xw-1/3 flex justify-center align-bottom block xtext-gray-500 focus:outline-none focus:text-primary-500" :class="{ 'transition transform-180': isOpen }" aria-label="Menu">
+            <div>THINGS THAT <span class="xborder-b border-current min-w-2/5 mx-2 uppercase text-sm">{{tag | default('...') | safe }}</span></div>
+        </button>
+
+        <div class="flex justify-end xw-1/3 pr-3 z-30">
+            <div>
+                <button hidden class="snipcart-checkout xtext-gray-500  pl-4">$<sup class="text-xs md:text-sm text-ms-primary">(<span class="snipcart-items-count"></span>)</sup></button>
+            </div>
+            <button @click="menuIsOpen = !menuIsOpen" type="button" class="focus:outline-none focus:text-primary-500" :class="{ 'transition transform-180 text-ms-blue': menuIsOpen }" aria-label="Menu">
+                <svg x-show="menuIsOpen" class="fill-current" viewBox="0 0 35 35" style="width:1em; height:1em;"><use xlink:href="#cross" x="0" y="0" /></svg>
+                <svg x-show="!menuIsOpen" class="fill-current" viewBox="0 0 35 35" style="width:1em; height:1em;"><use xlink:href="#hamburger" x="0" y="0" /></svg>
+            </button>
+
+        </div>
+       
+        <!--Things Menu-->
+        <div class="xabsolute xtop-12 bg-ms-green w-full flex-grow xlg:flex xlg:items-center xlg:w-auto xtext-center" :class="{ 'block shadow-3xl': isOpen, 'hidden': !isOpen }" @click.away="isOpen = false" x-show.transition="true">
+
+                <ul class="pt-6 lg:pt-0 list-reset xlg:flex justify-center flex-1 xitems-center flex-wrap w-96 mx-auto">
+                    {%for item in helpers.collectionTags(collections.projects,collections) %}
+                        <li class="nav__item mr-3">
+                            <a @click="isOpen = false" class=" text-sm uppercase inline-block xtext-gray-500 no-underline hover:text-ms-primary py-2 px-4 " href="/tags/{{helpers.slug(item) }}">{{ item }}</a>
+                        </li>
+                    {%endfor%}
+                </ul>
+        </div>
+
+        <!-- Hamburger Menu -->
+        <div class="w-1/2 min-w-max bg-ms-brown absolute z-20 right-0 top-0 text-ms-blue" :class="{ 'block shadow-3xl': menuIsOpen, 'hidden': !menuIsOpen }" @click.away="menuIsOpen = false" x-show.transition="true">
+
+            <ul class="pt-6 lg:pt-0 list-reset lg:flex justify-center flex-1 items-center">
+                <li class="nav__item mr-3">
+                    <a @click="projectIsOpen = true" class="text-ml inline-block no-underline hover:text-indigo-500 py-2 px-4 uppercase" href="#">Project List</a>
+                    <a @click="infoIsOpen = true" class="text-ml inline-block no-underline hover:text-indigo-500 py-2 px-4 uppercase" href="#">Info</a>
+                </li>
+            </ul>
+
+            {# {% if navigation.items %}
+
+                <ul class="pt-6 lg:pt-0 list-reset lg:flex justify-center flex-1 items-center">
+                    {% for item in navigation.items %}
+                        <li class="nav__item mr-3">
+                            <a @click="menuIsOpen = false" class="text-ml inline-block no-underline hover:text-indigo-500 py-2 px-4 " href="{{ item.url }}">{{ item.text }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            {% endif %} #}
+        </div>
+    </nav>
+</div>
